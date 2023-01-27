@@ -1,6 +1,6 @@
 //let p1="Z",p2="Z",p3="Z",p4="Z",p5="Z",p6="Z",p7="Z",p8="Z",p9="Z";
 let p=["z","z","z","z","z","z","z","z","z"];
-console.log(p[2]);
+
 function winner(c){
     if(p[0]===c && p[1]===c && p[2]===c || p[3]===c && p[4]===c & p[5]===c || p[6]===c && p[7]===c && p[9]===c || p[0]===c && p[3]===c && p[6]===c 
         || p[1]===c && p[4]===c && p[7]===c || p[2]===c && p[5]===c && p[8]===c || p[0]===c && p[4]===c && p[8]===c || p[02]===c && p[4]===c && p[6]===c){
@@ -18,8 +18,8 @@ function winner(c){
 const Player =(name , choice) =>{
     let score=0;
     const getName =() => name;
-    const getScore=()=> score;
     const getChoice = () => choice;
+    const getScore=()=> score;
     const setScore= ()=>{
         score++;
     };
@@ -43,7 +43,7 @@ function play(){
                 c=c-1;
             }
             p[c]=choice;
-            if(winner(choice)===true){
+            if(winner(choice)){
                 ali.setScore();
                 break;
             }
@@ -57,7 +57,7 @@ function play(){
                 c=c-1;
             }
             p[c]=choice;
-            if(winner(choice)===true){
+            if(winner(choice)){
                 rawan.setScore();
                 break;
             }

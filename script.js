@@ -1,4 +1,19 @@
-//let p1="Z",p2="Z",p3="Z",p4="Z",p5="Z",p6="Z",p7="Z",p8="Z",p9="Z";
+
+const container=document.querySelector('.container');
+
+
+const Player =(name , choice) =>{
+    let score=0;
+    const getName =() => name;
+    const getChoice = () => choice;
+    const getScore=()=> score;
+    const setScore= ()=>{
+        score++;
+    };
+    return {getName,getScore,getChoice,setScore};
+};
+
+
 let p=["z","z","z","z","z","z","z","z","z"];
 
 function winner(c){
@@ -13,62 +28,76 @@ function winner(c){
     }
 }
 
-//winner("Z");
-
-const Player =(name , choice) =>{
-    let score=0;
-    const getName =() => name;
-    const getChoice = () => choice;
-    const getScore=()=> score;
-    const setScore= ()=>{
-        score++;
-    };
-    return {getName,getScore,getChoice,setScore};
-};
-
-const ali= Player("ali","X");
-const rawan =Player("rawan","O");
-
-let turn =1;
-let choice="Z";
-function play(){ 
-    for(let i=0; i<9;i++){
-        if(turn ===1){
-            
-        choice=ali.getChoice();
-            let c = prompt(ali.getName()+ " enter place");
-            c=c-1;
-            while(p[c]!=="z"){
-                c = prompt(ali.getName()+ " enter place");
-                c=c-1;
-            }
-            p[c]=choice;
-            if(winner(choice)){
-                ali.setScore();
-                break;
-            }
-        turn =2;
-        }else if(turn ===2){
-            choice=rawan.getChoice();
-            let c = prompt(rawan.getName()+" enter place");
-            c=c-1;
-            while(!(p[c]==="z")){
-                c = prompt(rawan.getName()+" enter place");
-                c=c-1;
-            }
-            p[c]=choice;
-            if(winner(choice)){
-                rawan.setScore();
-                break;
-            }
-        turn =1;
-        }
+function position(nb){
+    if(nb==="b1"){
+        return 1;
+    }else if(nb==="b2"){
+        return 4;
+    }else if(nb==="b3"){
+        return 7;
+    }else if(nb==="b4"){
+        return 2;
+    }else if(nb==="b5"){
+        return 5;
+    }else if(nb==="b6"){
+        return 8;
+    }else if(nb==="b7"){
+        return 3;
+    }else if(nb==="b8"){
+        return 6;
+    }else if(nb==="b9"){
+        return 9;
     }
-    reset();
 }
 
-function reset(){
+function reset(t){
+    t=1;
     for(let i=0; i<p.length;i++){
         p[i]="z";
     }
 }
+
+const ali= Player("ali","X");
+const rawan =Player("rawan","O");
+let turn=1;
+let choice="";
+
+
+container.addEventListener('click',function(e){
+    if(e.target.classList.contains('btn')){
+        let a=e.target.classList;
+        let b=e.target;
+        
+        /*
+        console.log(a[1]);
+        let c=position(a[1]);
+        */
+        if(b.innerHTML==""){
+            if(turn===1){
+                choice=ali.getChoice();
+                b.innerHTML=choice;
+                c=c-1;
+                p[c]=choice;
+                turn=2;
+                if(winner(choice)){
+                    turn=3;
+                    ali.setScore(); 
+                }
+            }
+            else if(turn===2){
+                choice=rawan.getChoice();
+                c=c-1;
+                b.innerHTML=choice;
+                p[c]=choice;
+                turn=1;
+                if(winner(choice)){
+                    rawan.setScore();
+                    turn=3;
+                }
+            }
+        }
+    }
+   
+});
+
+

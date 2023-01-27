@@ -78,6 +78,6 @@ footer i{
     
 }
 footer i:hover{
-    transform: scale(1.15) rotate(180deg);
+    transform: scale(1.15) rotate(360deg);
     color: #46494b;
 }
